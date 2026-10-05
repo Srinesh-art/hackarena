@@ -1,0 +1,41 @@
+services:
+  trainer:
+    build:
+      context: ./trainer
+    volumes:
+      - ./data:/data
+      - ./models:/models
+    restart: "no"
+
+  api:
+    build:
+      context: ./api
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      trainer:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import json,urllib.request; d=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)); raise SystemExit(0 if d.get('model_loaded') is True else 1)"
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    restart: "no"
+
+  evaluator:
+    build:
+      context: ./evaluator
+    volumes:
+      - ./models:/models:ro
+      - ./results:/results
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: "no"
