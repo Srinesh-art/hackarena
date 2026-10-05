@@ -157,3 +157,16 @@ Potential production extensions include richer request features, online feature 
 
 ## 19. Development Notes
 The implementation deliberately avoids LLMs, paid APIs, and unnecessary infrastructure. The system remains CPU-friendly and focused on proving the complete segmentation-to-personalization workflow.
+
+
+## 25. GitHub Repository & Version Control
+
+The completed project was committed to Git version control and pushed to the official GitHub repository:
+
+https://github.com/Srinesh-art/hackarena.git
+
+The repository contains the Docker Compose configuration, Trainer, API, Evaluator, preprocessing outputs, model artifacts, evaluation results, README, REPORT.md, and the presentation-ready Word report. It provides a reproducible source-control snapshot of the implemented hackathon system.
+
+Initial project commit: b3a29fa — feat: containerized OTT audience segmentation system.
+
+Repository: Srinesh-art/hackarena | Default branch: main.
